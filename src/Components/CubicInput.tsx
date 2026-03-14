@@ -5,23 +5,24 @@ export const CubicInput = () => {
     const [b, setB] = useState<number>(0);
     const [c, setC] = useState<number>(0);
     const [d, setD] = useState<number>(0);
+    const [p, setP] = useState<number>(0);
+    const [q, setQ] = useState<number>(0);
+    const [discriminant, setDiscriminant] = useState<number>(0);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+
         const p: number = (3 * a * c - b * b) / (3 * a * a);
         const q: number = (2 * b * b * b - 9 * a * b * c + 27 * a * a * d) / (27 * a * a * a);
-    
-        // Display p and q values
-        (document.getElementById("p-result") as HTMLParagraphElement).textContent = `${p}`;
-    
-        (document.getElementById("q-result") as HTMLParagraphElement).textContent = `${q}`;
-    
+        setP(p);
+        setQ(q);
+
         const discriminant: number = (q / 2) * (q / 2) + (p / 3) * (p / 3) * (p / 3);
-    
-        (document.getElementById("discriminant-result") as HTMLParagraphElement).textContent = `${discriminant}`;
-    
+        setDiscriminant(discriminant);
+
         const theta: number = (1/3)*Math.acos(-q / (2 * Math.sqrt(-(p / 3) * (p / 3) * (p / 3))));
+
         if(inputRef.current) {
             if (discriminant < 0) {
             const rootOne = 2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a);
