@@ -1,6 +1,9 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
+import type { CubicData } from "./CubicData.ts";
 
-export const CubicInput = () => {
+export const CubicInput = ({a, b, c, d, p, q, discriminant, roots}: CubicData) => {
+    let roots = [];
+
     const [a, setA] = useState<number>(0);
     const [b, setB] = useState<number>(0);
     const [c, setC] = useState<number>(0);
@@ -8,7 +11,6 @@ export const CubicInput = () => {
     const [p, setP] = useState<number>(0);
     const [q, setQ] = useState<number>(0);
     const [discriminant, setDiscriminant] = useState<number>(0);
-    const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -23,20 +25,18 @@ export const CubicInput = () => {
 
         const theta: number = (1/3)*Math.acos(-q / (2 * Math.sqrt(-(p / 3) * (p / 3) * (p / 3))));
 
-        if(inputRef.current) {
             if (discriminant < 0) {
                 const rootOne = 2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a);
                 const rootTwo = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI / 3)) - b / (3 * a);
                 const rootThree = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI / 3)) - b / (3 * a);
-                inputRef.current.value = `Roots: ${rootOne}, ${rootTwo}, ${rootThree}`;
+                roots = [rootOne, rootTwo, rootThree];
             
             } else if (discriminant > 0) {
                 const rootOne =
                     Math.cbrt(-q / 2 + Math.sqrt(discriminant)) +
                     Math.cbrt(-q / 2 - Math.sqrt(discriminant)) -
                     b / (3 * a);
-
-                inputRef.current.value = `Root: ${rootOne}`;
+                    roots = [rootOne, "complex", "complex"];
             
             } else {
                 if (q === 0 && p === 0) {
@@ -44,22 +44,28 @@ export const CubicInput = () => {
                         Math.cbrt((-q / 2) + Math.sqrt(discriminant)) +
                         Math.cbrt((-q / 2) - Math.sqrt(discriminant)) -
                         b / (3 * a);
-
-                    inputRef.current.value = `Root: ${rootOne}`;
+                        roots = [rootOne, rootOne, rootOne];
             
                 } else {
                     const rootOne =
                         Math.cbrt((-q / 2) + Math.sqrt(discriminant)) +
                         Math.cbrt((-q / 2) - Math.sqrt(discriminant)) -
                         b / (3 * a);
-
                     const rootTwo = -Math.cbrt(-q / 2) - b / (3 * a);
-
-                    inputRef.current.value = `Roots: ${rootOne}, ${rootTwo}`;
+                    roots = [rootOne, rootTwo, "complex"];
                 }
-            }
-        }
+        } 
+
+        setData({
+            a, b, c, d,
+            p,
+            q,
+            discriminant,
+            roots
+          });
     }; 
+
+    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -120,7 +126,6 @@ export const CubicInput = () => {
 
                 {/* Output */}
                 <input
-                    ref={inputRef}
                     readOnly
                     className="mt-4 w-full border rounded-lg p-3 bg-gray-50 text-gray-800"
                 />

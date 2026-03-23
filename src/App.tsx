@@ -6,16 +6,17 @@ import { CubicTable } from './Components/CubicTable';
 import { CubicHistory } from './Components/CubicHistory';
 
 export const App = () => {
-  const [a, setA] = useState(0);
-  const [b, setB] = useState(0);
-  const [c, setC] = useState(0);
-  const [d, setD] = useState(0);
-  
+  const [data, setData] = useState({
+    a: 0, b: 0, c: 0, d: 0,
+    p: 0, q: 0, discriminant: 0,
+    roots: []
+  });
+
   return (
     <div className="app">
       <h1 className="text-3xl font-bold mb-4">Cubic Equation Solver</h1>
-      <CubicInput />
-      <CubicTable />
+      <CubicInput setData={setData}/>
+      <CubicTable data={data}/>
       <CubicHistory />
     </div>
   );
