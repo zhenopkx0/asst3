@@ -25,42 +25,106 @@ export const CubicInput = () => {
 
         if(inputRef.current) {
             if (discriminant < 0) {
-            const rootOne = 2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a);
-            const rootTwo = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI / 3)) - b / (3 * a);
-            const rootThree = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI / 3)) - b / (3 * a);
-            inputRef.current.value = `Roots: ${rootOne}, ${rootTwo}, ${rootThree}`;
-        
+                const rootOne = 2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a);
+                const rootTwo = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI / 3)) - b / (3 * a);
+                const rootThree = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI / 3)) - b / (3 * a);
+                inputRef.current.value = `Roots: ${rootOne}, ${rootTwo}, ${rootThree}`;
+            
             } else if (discriminant > 0) {
-            const rootOne = Math.cbrt(-q / 2 + Math.sqrt(discriminant)) + Math.cbrt(-q / 2 - Math.sqrt(discriminant)) - b / (3 * a);
-            inputRef.current.value = `Root: ${rootOne}`;
-        
-            } else {
-            if (q === 0 && p === 0) {
-                const rootOne = Math.cbrt((-q / 2) + Math.sqrt(discriminant)) + Math.cbrt((-q / 2) - Math.sqrt(discriminant)) - b / (3 * a);
+                const rootOne =
+                    Math.cbrt(-q / 2 + Math.sqrt(discriminant)) +
+                    Math.cbrt(-q / 2 - Math.sqrt(discriminant)) -
+                    b / (3 * a);
+
                 inputRef.current.value = `Root: ${rootOne}`;
-        
+            
             } else {
-                const rootOne = Math.cbrt((-q / 2) + Math.sqrt(discriminant)) + Math.cbrt((-q / 2) - Math.sqrt(discriminant)) - b / (3 * a); // Cardano
-                const rootTwo = -Math.cbrt(-q / 2) - b / (3 * a); // Single root
-                inputRef.current.value = `Roots: ${rootOne}, ${rootTwo}`;
+                if (q === 0 && p === 0) {
+                    const rootOne =
+                        Math.cbrt((-q / 2) + Math.sqrt(discriminant)) +
+                        Math.cbrt((-q / 2) - Math.sqrt(discriminant)) -
+                        b / (3 * a);
+
+                    inputRef.current.value = `Root: ${rootOne}`;
+            
+                } else {
+                    const rootOne =
+                        Math.cbrt((-q / 2) + Math.sqrt(discriminant)) +
+                        Math.cbrt((-q / 2) - Math.sqrt(discriminant)) -
+                        b / (3 * a);
+
+                    const rootTwo = -Math.cbrt(-q / 2) - b / (3 * a);
+
+                    inputRef.current.value = `Roots: ${rootOne}, ${rootTwo}`;
                 }
             }
         }
     }; 
 
     return (
-        <div className="cubic-input">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <input type="number" placeholder="a" value={a} onChange={(e) => setA(Number(e.target.value))} className="border p-2" />
-                <input type="number" placeholder="b" value={b} onChange={(e) => setB(Number(e.target.value))} className="border p-2" />
-                <input type="number" placeholder="c" value={c} onChange={(e) => setC(Number(e.target.value))} className="border p-2" />
-                <input type="number" placeholder="d" value={d} onChange={(e) => setD(Number(e.target.value))} className="border p-2" />
-                <button type="submit" className="bg-blue-500 text-white p-2">Calculate</button>
-            </form>
-            <p id="p-result"></p>
-            <p id="q-result"></p>
-            <p id="discriminant-result"></p>
-            <input ref={inputRef} readOnly className="border p-2 mt-4 w-full" />
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+            <div className="bg-white shadow-xl rounded-2xl p-6 w-full max-w-md">
+                
+                <h1 className="text-2xl font-bold text-center mb-6">
+                    Cubic Equation Solver
+                </h1>
+
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    
+                    <input
+                        type="number"
+                        placeholder="Coefficient a"
+                        value={a}
+                        onChange={(e) => setA(Number(e.target.value))}
+                        className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+
+                    <input
+                        type="number"
+                        placeholder="Coefficient b"
+                        value={b}
+                        onChange={(e) => setB(Number(e.target.value))}
+                        className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+
+                    <input
+                        type="number"
+                        placeholder="Coefficient c"
+                        value={c}
+                        onChange={(e) => setC(Number(e.target.value))}
+                        className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+
+                    <input
+                        type="number"
+                        placeholder="Coefficient d"
+                        value={d}
+                        onChange={(e) => setD(Number(e.target.value))}
+                        className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+
+                    <button
+                        type="submit"
+                        className="bg-blue-500 hover:bg-blue-600 transition text-white font-semibold py-3 rounded-lg"
+                    >
+                        Save
+                    </button>
+                </form>
+
+                {/* Results */}
+                <div className="mt-6 space-y-2 text-sm text-gray-700">
+                    <p><span className="font-semibold">p:</span> {p}</p>
+                    <p><span className="font-semibold">q:</span> {q}</p>
+                    <p><span className="font-semibold">Discriminant:</span> {discriminant}</p>
+                </div>
+
+                {/* Output */}
+                <input
+                    ref={inputRef}
+                    readOnly
+                    className="mt-4 w-full border rounded-lg p-3 bg-gray-50 text-gray-800"
+                />
+            </div>
         </div>
-    )
-}
+    );
+};

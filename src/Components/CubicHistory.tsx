@@ -1,2 +1,5 @@
 export const CubicHistory = () => {
+    return (
+        <></>
+    )
 }
