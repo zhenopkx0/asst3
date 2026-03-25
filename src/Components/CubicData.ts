@@ -6,5 +6,7 @@ export type CubicData = {
     p: number;
     q: number;
     discriminant: number;
-    roots: number[];
+    root1: number | string;
+    root2: number | string;
+    root3: number | string;
   };

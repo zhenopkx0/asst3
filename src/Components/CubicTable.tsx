@@ -1,6 +1,6 @@
 import { CubicData } from "./CubicData.ts";
 
-export const CubicTable = ({ a, b, c, p, q, discriminant, roots }: CubicData) => {
+export const CubicTable = ({p, q, discriminant, root1, root2, root3}: CubicData) => {
     return (
         <table>
             <tr>
@@ -17,15 +17,15 @@ export const CubicTable = ({ a, b, c, p, q, discriminant, roots }: CubicData) =>
             </tr>
             <tr>
                 <td>Root 1</td>
-                <td>{roots[0]}</td>
+                <td>{root1}</td>
             </tr>
             <tr>
                 <td>Root 2</td>
-                <td>{roots[1]}</td>
+                <td>{root2}</td>
             </tr>
             <tr>
                 <td>Root 3</td>
-                <td>{roots[2]}</td>
+                <td>{root3}</td>
             </tr>
         </table>
     );
