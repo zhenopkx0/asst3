@@ -1,5 +1,4 @@
-export const CubicGraph = () => {
-
+export const CubicGraph = ({a, b, c, d}: {a:number, b:number, c:number, d:number}) => {
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -84,4 +83,6 @@ function drawCoordinateAxes() {
     circleRoots(a, b, c, d);
     }
   }
+
+  updateGraph(a, b, c, d);
 }
