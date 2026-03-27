@@ -22,18 +22,20 @@ export const CubicInput = ({
   return (
     <div className="flex items-center justify-center bg-gradient-to-br from-green-50 to-amber-100 px-4 py-8 min-h-screen">
       <div className="bg-white/90 backdrop-blur shadow-xl rounded-2xl p-8 w-full max-w-md border border-green-100">
-        
         <h1 className="text-2xl font-semibold text-center mb-6 text-green-800">
           Cubic Solver
         </h1>
 
-        <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-5">
-
-          {[{ label: "a", value: a, setter: setA },
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="flex flex-col gap-5"
+        >
+          {[
+            { label: "a", value: a, setter: setA },
             { label: "b", value: b, setter: setB },
             { label: "c", value: c, setter: setC },
-            { label: "d", value: d, setter: setD }].map(({ label, value, setter }) => (
-
+            { label: "d", value: d, setter: setD },
+          ].map(({ label, value, setter }) => (
             <div key={label} className="flex flex-col">
               <label className="text-sm font-medium text-green-900/80 mb-1">
                 Coefficient {label}
@@ -60,7 +62,6 @@ export const CubicInput = ({
           >
             Save
           </button>
-
         </form>
       </div>
     </div>

@@ -19,23 +19,17 @@ export const App = () => {
   const q: number =
     (2 * b * b * b - 9 * a * b * c + 27 * a * a * d) / (27 * a * a * a);
 
-  const discriminant: number =
-    (q / 2) * (q / 2) + (p / 3) * (p / 3) * (p / 3);
+  const discriminant: number = (q / 2) * (q / 2) + (p / 3) * (p / 3) * (p / 3);
 
   const theta: number =
-    (1 / 3) *
-    Math.acos(-q / (2 * Math.sqrt(-(p / 3) * (p / 3) * (p / 3))));
+    (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-(p / 3) * (p / 3) * (p / 3))));
 
   if (discriminant < 0) {
     const rootOne = 2 * Math.sqrt(-p / 3) * Math.cos(theta) - b / (3 * a);
     const rootTwo =
-      2 * Math.sqrt(-p / 3) *
-        Math.cos(theta + (2 * Math.PI) / 3) -
-      b / (3 * a);
+      2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3) - b / (3 * a);
     const rootThree =
-      2 * Math.sqrt(-p / 3) *
-        Math.cos(theta + (4 * Math.PI) / 3) -
-      b / (3 * a);
+      2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3) - b / (3 * a);
     root1 = rootOne.toFixed(2);
     root2 = rootTwo.toFixed(2);
     root3 = rootThree.toFixed(2);
@@ -70,10 +64,8 @@ export const App = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-amber-50 to-green-100 py-8 px-4">
-      
       {/* App Container */}
       <div className="max-w-3xl mx-auto space-y-6">
-        
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold text-center text-green-900">
           Cubic Equation Solver
@@ -84,7 +76,6 @@ export const App = () => {
 
         {/* Input + Table grouped */}
         <div className="grid md:grid-cols-2 gap-6 items-start">
-          
           <CubicInput
             a={a}
             b={b}
@@ -105,11 +96,8 @@ export const App = () => {
             root3={root3}
           />
         </div>
-
-        {/* Optional Graph / History */}
-        {/* <CubicGraph /> */}
+        <CubicGraph a={a} b={b} c={c} d={d}/>
         {/* <CubicHistory /> */}
-
       </div>
     </div>
   );
