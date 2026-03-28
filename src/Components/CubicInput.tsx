@@ -20,50 +20,66 @@ export const CubicInput = ({
   setD,
 }: CubicInputProps) => {
   return (
-    <div className="flex items-center justify-center bg-gradient-to-br from-green-50 to-amber-100 px-4 py-8 min-h-screen">
-      <div className="bg-white/90 backdrop-blur shadow-xl rounded-2xl p-8 w-full max-w-md border border-green-100">
-        <h1 className="text-2xl font-semibold text-center mb-6 text-green-800">
-          Cubic Solver
-        </h1>
+    <div className="w-full">
+      <h2 className="text-xl font-semibold text-[#5c6b4f] mb-4">
+        Coefficients
+      </h2>
 
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="flex flex-col gap-5"
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="flex flex-col gap-4"
+      >
+        {[
+          { label: "a", value: a, setter: setA },
+          { label: "b", value: b, setter: setB },
+          { label: "c", value: c, setter: setC },
+          { label: "d", value: d, setter: setD },
+        ].map(({ label, value, setter }) => (
+          <div key={label} className="flex flex-col">
+            <label className="text-sm font-medium text-[#5c6b4f]/90 mb-1">
+              Coefficient {label}
+            </label>
+
+            <input
+              type="number"
+              value={value}
+              onChange={(e) => setter(Number(e.target.value))}
+              className="
+                bg-[#fdfdf9]
+                border border-[#c8d5c0]
+                rounded-lg
+                p-3
+                text-[#3f4a36]
+                placeholder-[#9aa68c]
+                focus:outline-none
+                focus:ring-2
+                focus:ring-[#a3b18a]
+                focus:bg-white
+                transition
+              "
+            />
+          </div>
+        ))}
+
+        <button
+          type="submit"
+          className="
+            mt-2
+            bg-[#6b8e23]
+            hover:bg-[#5f7d1f]
+            text-white
+            font-semibold
+            py-3
+            rounded-lg
+            shadow-sm
+            transition-all
+            duration-200
+            active:scale-95
+          "
         >
-          {[
-            { label: "a", value: a, setter: setA },
-            { label: "b", value: b, setter: setB },
-            { label: "c", value: c, setter: setC },
-            { label: "d", value: d, setter: setD },
-          ].map(({ label, value, setter }) => (
-            <div key={label} className="flex flex-col">
-              <label className="text-sm font-medium text-green-900/80 mb-1">
-                Coefficient {label}
-              </label>
-
-              <input
-                type="number"
-                value={value}
-                onChange={(e) => setter(Number(e.target.value))}
-                className="bg-green-50 border border-green-200 rounded-lg p-3
-                           text-green-900 placeholder-green-400
-                           focus:outline-none focus:ring-2 focus:ring-green-500
-                           focus:bg-white transition"
-              />
-            </div>
-          ))}
-
-          <button
-            type="submit"
-            className="mt-3 bg-green-700 hover:bg-green-800 
-                       text-white font-semibold py-3 rounded-lg 
-                       shadow-md transition-all duration-200 
-                       active:scale-95"
-          >
-            Save
-          </button>
-        </form>
-      </div>
+          Save
+        </button>
+      </form>
     </div>
   );
 };

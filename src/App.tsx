@@ -62,42 +62,61 @@ export const App = () => {
     }
   }
 
+  // 🌿 shared card style
+  const card =
+    "bg-[#f4f7f2] border border-[#c8d5c0] rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-5 h-full";
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-amber-50 to-green-100 py-8 px-4">
-      {/* App Container */}
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#eef3ea] via-[#f6f8f3] to-[#e4eddc] py-10 px-4">
+      <div className="max-w-5xl mx-auto space-y-6">
+        
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-green-900">
+        <h1 className="text-4xl font-bold text-center text-[#5c6b4f]">
           Cubic Equation Solver
         </h1>
 
-        {/* Equation Display */}
-        <CubicEquation a={a} b={b} c={c} d={d} />
-
-        {/* Input + Table grouped */}
-        <div className="grid md:grid-cols-2 gap-6 items-start">
-          <CubicInput
-            a={a}
-            b={b}
-            c={c}
-            d={d}
-            setA={setA}
-            setB={setB}
-            setC={setC}
-            setD={setD}
-          />
-
-          <CubicTable
-            p={p}
-            q={q}
-            discriminant={discriminant}
-            root1={root1}
-            root2={root2}
-            root3={root3}
-          />
+        {/* Equation */}
+        <div className={card}>
+          <CubicEquation a={a} b={b} c={c} d={d} />
         </div>
-        <CubicGraph a={a} b={b} c={c} d={d}/>
-        {/* <CubicHistory /> */}
+
+        {/* Input + Table */}
+        <div className="grid md:grid-cols-2 gap-6 items-stretch">
+          <div className={card}>
+            <CubicInput
+              a={a}
+              b={b}
+              c={c}
+              d={d}
+              setA={setA}
+              setB={setB}
+              setC={setC}
+              setD={setD}
+            />
+          </div>
+
+          <div className={card}>
+            <CubicTable
+              p={p}
+              q={q}
+              discriminant={discriminant}
+              root1={root1}
+              root2={root2}
+              root3={root3}
+            />
+          </div>
+        </div>
+
+        {/* Graph + History aligned */}
+        <div className="grid md:grid-cols-2 gap-6 items-stretch">
+          <div className={card + " flex justify-center items-center"}>
+            <CubicGraph a={a} b={b} c={c} d={d} />
+          </div>
+
+          <div className={card}>
+            <CubicHistory a={a} b={b} c={c} d={d} />
+          </div>
+        </div>
       </div>
     </div>
   );
