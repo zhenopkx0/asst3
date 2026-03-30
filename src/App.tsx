@@ -14,6 +14,7 @@ export const App = () => {
   const [b, setB] = useState<number>(0);
   const [c, setC] = useState<number>(0);
   const [d, setD] = useState<number>(0);
+  const [selectedGraph, setSelectedGraph] = useState<{ a: number; b: number; c: number; d: number } | null>(null);
 
   const p: number = (3 * a * c - b * b) / (3 * a * a);
   const q: number =
@@ -113,9 +114,20 @@ export const App = () => {
             <CubicGraph a={a} b={b} c={c} d={d} />
           </div>
 
-          <div className={card}>
-            <CubicHistory a={a} b={b} c={c} d={d} />
-          </div>
+            <div className={card}>
+            <CubicHistory 
+              onSelect={(items) => {
+                setA(items.a);
+                setB(items.b);
+                setC(items.c);
+                setD(items.d);
+              }}
+              a={a}
+              b={b} 
+              c={c} 
+              d={d} 
+            />
+            </div>
         </div>
       </div>
     </div>

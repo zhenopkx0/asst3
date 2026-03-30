@@ -60,25 +60,6 @@ export const CubicInput = ({
             />
           </div>
         ))}
-
-        <button
-          type="submit"
-          className="
-            mt-2
-            bg-[#6b8e23]
-            hover:bg-[#5f7d1f]
-            text-white
-            font-semibold
-            py-3
-            rounded-lg
-            shadow-sm
-            transition-all
-            duration-200
-            active:scale-95
-          "
-        >
-          Save
-        </button>
       </form>
     </div>
   );
